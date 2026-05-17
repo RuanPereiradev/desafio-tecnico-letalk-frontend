@@ -1,8 +1,8 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useCompanySearch, useCompanyAnalysis } from './useCompany';
+import '@testing-library/jest-dom';
 
-// Alterado de global.fetch para globalThis.fetch para o TypeScript aceitar nativamente
 globalThis.fetch = vi.fn();
 
 describe('useCompanySearch Hook', () => {
@@ -31,7 +31,8 @@ describe('useCompanySearch Hook', () => {
       await result.current.searchCompany('12.345.678/0001-99');
     });
 
-    expect(fetch).toHaveBeenCalledWith('http://localhost:3333/api/company/12345678000199', expect.any(Object));
+    // 🌟 Atualizado para usar a variável de ambiente dinamicamente
+    expect(fetch).toHaveBeenCalledWith(`${import.meta.env.VITE_API_URL}/company/12345678000199`, expect.any(Object));
     expect(result.current.data).toEqual(mockCompany);
     expect(result.current.isLoading).toBe(false);
     expect(result.current.isError).toBe(false);
@@ -89,7 +90,8 @@ describe('useCompanyAnalysis Hook', () => {
       await result.current.fetchAnalysis('12345678000199');
     });
 
-    expect(fetch).toHaveBeenCalledWith('http://localhost:3333/api/company/12345678000199/analysis', expect.any(Object));
+    // 🌟 Atualizado para usar a variável de ambiente dinamicamente
+    expect(fetch).toHaveBeenCalledWith(`${import.meta.env.VITE_API_URL}/company/12345678000199/analysis`, expect.any(Object));
     expect(result.current.analysis).toEqual(mockAnalysis);
     expect(result.current.isLoading).toBe(false);
   });
