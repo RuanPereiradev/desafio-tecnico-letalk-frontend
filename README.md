@@ -2,7 +2,6 @@
 
 ## 1. Visão Geral do Projeto
 O **Letalk.Insights** é uma plataforma SPA (Single Page Application) desenvolvida em **React** e **TypeScript**, utilizando **Vite** como ferramenta de build. O objetivo principal do sistema é atuar como uma *Engine de Enrichment B2B*, permitindo que times de vendas e marketing insiram dados cadastrais (Nome, E-mail, Telefone e CNPJ) para validar e enriquecer leads de forma automática através de requisições a um backend Fastify. 
-**IMPORTANTE** ao usar em produção estou usando a versão gratuita do render que deixa o backend em standby quando não utilizado, então a primeira requisição demora alguns segundos a mais
 
 #### 1.1 Minha visão sobre o projeto e desenvolvimento
 Busquei fazer um frontend simples, otimizado e atual. Tentei trazer um design moderno com algumas animações simples. O front foi onde tive mais dificuldade; apesar de ter estudado bastante React, a questão do desenvolvimento frontend eu sinto certa dificuldade. A utilização da IA foi excepcional para que eu conseguisse desenvolver de forma rápida, principalmente na parte das animações. Usei o plano gratuito do Gemini, que para mim foi o suficiente. Discuti com ele a arquitetura até chegarmos a um consenso. Iniciei o frontend no sábado por volta das 14h e terminei no mesmo dia. No domingo, por volta das 6h da manhã, voltei a configurá-lo para colocar em produção. Utilizeis dois arquivos .env: um para production e outro para development (rodar localmente)
@@ -103,7 +102,7 @@ src/
 
 O projeto foi totalmente implantado na nuvem e pode ser acessado de forma 100% online através dos links abaixo:
 
-* **Frontend (Interface do Usuário):** [https://desafio-tecnico-letalk-frontend.netlify.app](https://desafio-tecnico-letalk-frontend.netlify.app) *(Substitua pela sua URL real do Netlify)*
+* **Frontend (Interface do Usuário):** [https://letalk-front.netlify.app/](https://letalk-front.netlify.app/) 
 * **Backend (API Rest):** [https://desafio-tecnico-letalk-backend.onrender.com](https://desafio-tecnico-letalk-backend.onrender.com)
 * **Endpoint de Rota de Saúde (Healthcheck):** `/api/health` ou `/health`
 
