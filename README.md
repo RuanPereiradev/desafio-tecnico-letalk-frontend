@@ -119,3 +119,7 @@ Ao executar o comando `npm run dev`, o Vite consome o arquivo `.env.development`
 ```env
 VITE_API_URL=http://localhost:3333/api
 ```
+
+### Se tivesse mais tempo:
+- modo claro: botão de alterar modos entre claro e escuro
+- mais dashboards: colocaria mais metricas e dashboards sobre a empresa na analise do bot
