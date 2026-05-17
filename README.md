@@ -1,9 +1,11 @@
 # 📑 Documentação do Front-end: Letalk.Insights
 
 ## 1. Visão Geral do Projeto
-O **Letalk.Insights** é uma plataforma SPA (Single Page Application) desenvolvida em **React** e **TypeScript**, utilizando **Vite** como ferramenta de build. O objetivo principal do sistema é atuar como uma *Engine de Enrichment B2B*, permitindo que times de vendas e marketing insiram dados cadastrais (Nome, E-mail, Telefone e CNPJ) para validar e enriquecer leads de forma automática através de requisições a um backend Fastify.
+O **Letalk.Insights** é uma plataforma SPA (Single Page Application) desenvolvida em **React** e **TypeScript**, utilizando **Vite** como ferramenta de build. O objetivo principal do sistema é atuar como uma *Engine de Enrichment B2B*, permitindo que times de vendas e marketing insiram dados cadastrais (Nome, E-mail, Telefone e CNPJ) para validar e enriquecer leads de forma automática através de requisições a um backend Fastify. 
+**IMPORTANTE** ao usar em produção estou usando a versão gratuita do render que deixa o backend em standby quando não utilizado, então a primeira requisição demora alguns segundos a mais
 
----
+#### 1.1 Minha visão sobre o projeto e desenvolvimento
+Busquei fazer um frontend simples, otimizado e atual. Tentei trazer um design moderno com algumas animações simples. O front foi onde tive mais dificuldade; apesar de ter estudado bastante React, a questão do desenvolvimento frontend eu sinto certa dificuldade. A utilização da IA foi excepcional para que eu conseguisse desenvolver de forma rápida, principalmente na parte das animações. Usei o plano gratuito do Gemini, que para mim foi o suficiente. Discuti com ele a arquitetura até chegarmos a um consenso. Iniciei o frontend no sábado por volta das 14h e terminei no mesmo dia. No domingo, por volta das 6h da manhã, voltei a configurá-lo para colocar em produção. Utilizeis dois arquivos .env: um para production e outro para development (rodar localmente)
 
 ## 2. Tecnologias Utilizadas
 * **Core:** React 19+ / TypeScript
@@ -97,22 +99,24 @@ src/
   * **Renderização SVG Responsiva:** Utiliza o componente `ResponsiveContainer` da biblioteca `Recharts` para recalcular o diâmetro, raio interno (`innerRadius`) e posicionamento do gráfico automaticamente com base no tamanho do card que o engloba.
   * **Tooltip Customizada para Dark Mode:** Sobrescreve os estilos padrões da caixas de dica do gráfico para alinhar-se à paleta de cores escura da aplicação (`zinc-900` e `zinc-800`), utilizando fontes monoespaçadas para exibição limpa das porcentagens.
 
-  ### 6. Scripts de Execução e Comandos Utilitários
+## 🚀 Links do Projeto em Produção (Deploy)
 
-#### `npm run dev`
-* **Finalidade:** Inicializa o servidor de desenvolvimento local.
-* **Comportamento:** O Vite compila os módulos sob demanda via ESM nativo e disponibiliza a aplicação em `http://localhost:5173/`. Esse comando ativa o HMR (*Hot Module Replacement*), garantindo que qualquer alteração feita no código dos componentes (como no `CompanyDashboard.tsx` ou `SearchForm.tsx`) seja refletida instantaneamente no navegador sem recarregar a página e sem perder o estado atual dos dados preenchidos.
+O projeto foi totalmente implantado na nuvem e pode ser acessado de forma 100% online através dos links abaixo:
 
-#### `npm run build`
-* **Finalidade:** Compila e otimiza a aplicação inteira para o ambiente de produção.
-* **Comportamento:** O script executa duas etapas sequenciais obrigatórias:
-  1. **Validação de Tipos (`tsc -b`):** O compilador do TypeScript faz uma checagem estrita em todo o projeto. Se houver qualquer inconsistência de propriedades ou tipagens quebradas nos DTOs (`CompanyDTO`), o processo é interrompido imediatamente para evitar bugs em produção.
-  2. **Minificação e Bundling:** O Vite utiliza o *Rollup* para processar o código, gerando arquivos HTML, CSS e JavaScript estáticos, minificados, com técnicas de *tree-shaking* (remoção de código morto) e *code-splitting* na pasta final `dist/`.
+* **Frontend (Interface do Usuário):** [https://desafio-tecnico-letalk-frontend.netlify.app](https://desafio-tecnico-letalk-frontend.netlify.app) *(Substitua pela sua URL real do Netlify)*
+* **Backend (API Rest):** [https://desafio-tecnico-letalk-backend.onrender.com](https://desafio-tecnico-letalk-backend.onrender.com)
+* **Endpoint de Rota de Saúde (Healthcheck):** `/api/health` ou `/health`
 
-#### `npm run preview`
-* **Finalidade:** Instancia um servidor HTTP local para pré-visualizar o build de produção.
-* **Comportamento:** Serve localmente os arquivos gerados dentro da pasta `dist/`. É um comando crítico para a esteira de desenvolvimento, pois permite que o desenvolvedor valide o comportamento real da aplicação (velocidade de carregamento, funcionamento das animações do Framer Motion e renderização dos gráficos do Recharts) exatamente da mesma forma que ela se comportará quando for hospedada em servidores de nuvem de produção (como Vercel, Netlify ou Docker).
+> ⏳ **Nota Importante para o Avaliador:** O backend está hospedado no plano gratuito do **Render**. Caso a API fique sem receber requisições por mais de 15 minutos, o servidor entra em modo de suspensão (*Spin Down*). A primeira requisição após esse período pode demorar entre **30 e 50 segundos** para "acordar" o servidor. As requisições seguintes funcionarão instantaneamente na velocidade máxima.
 
-#### `npm run lint`
-* **Finalidade:** Executa a varredura e análise estática de qualidade do código através do ESLint.
-* **Comportamento:** Valida se o código respeita as regras de padronização configuradas em `eslint.config.js`. O comando mapeia e alerta sobre importações de ícones da Lucide não utilizados, variáveis declaradas que ficaram esquecidas no código, ou hooks do React que foram inseridos de forma condicional, garantindo a integridade e a manutenibilidade do ecossistema do front-end.
+---
+
+## 🛠️ Arquitetura de Ambientes & Variáveis (.env)
+
+O projeto foi estruturado seguindo os padrões de mercado, isolando completamente o ambiente de desenvolvimento local do ambiente de produção. O Frontend utiliza o ecossistema do **Vite** para gerenciar dinamicamente as URLs da API com base no comando executado.
+
+### 💻 Ambiente de Desenvolvimento (Local)
+Ao executar o comando `npm run dev`, o Vite consome o arquivo `.env.development`, apontando as requisições para a sua máquina:
+```env
+VITE_API_URL=http://localhost:3333/api
+```
